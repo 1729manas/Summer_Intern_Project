@@ -68,7 +68,7 @@ const Sidebar = () => {
               </div>
             </>
           )}
-          {(user?.role === "donar" || user?.role === "hospital") && (
+          {/* {(user?.role === "donar" || user?.role === "hospital") && (
             <div
               className={`menu-item ${
                 location.pathname === "/orgnaisation" && "active"
@@ -97,20 +97,7 @@ const Sidebar = () => {
               <i className="fa-sharp fa-solid fa-building-ngo"></i>
               <Link to="/donation">Donation</Link>
             </div>
-          )}
-
-          {/* {userMenu.map((menu) => {
-            const isActive = location.pathname === menu.path;
-            return (
-              <div
-                className={`menu-item ${isActive && "active"}`}
-                key={menu.name}
-              >
-                <i className={menu.icon}></i>
-                <Link to={menu.path}>{menu.name}</Link>
-              </div>
-            );
-          })} */}
+          )} */}
         </div>
       </div>
     </div>

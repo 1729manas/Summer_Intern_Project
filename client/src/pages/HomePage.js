@@ -14,7 +14,7 @@ const HomePage = () => {
   const { loading, error, user } = useSelector((state) => state.auth);
   const [data, setData] = useState([]);
   const [requests, setRequests] = useState([]);
-  const [ donations, setDonations] = useState([]);
+  const [donations, setDonations] = useState([]);
   const [showForm, setShowForm] = useState(false);
   const [showDonationForm, setShowDonationForm] = useState(false);
   const [selectedRequest, setSelectedRequest] = useState(null);
@@ -46,19 +46,19 @@ const HomePage = () => {
     }
   };
 
-  //Fetch blood donations requests
+  // Fetch blood donation requests
   const getBloodDonationRequests = async () => {
-    try{
+    try {
       const user = await API.get("/auth/current-user");
       const donations = await API.get("/donation/getdonations", user.data.user._id);
       console.log(donations.data);
-      if(donations?.status === 200){
+      if (donations?.status === 200) {
         setDonations(donations.data);
       }
-    }catch (error){
+    } catch (error) {
       console.error(error);
     }
-  }
+  };
 
   useEffect(() => {
     getBloodRecords();
@@ -90,18 +90,18 @@ const HomePage = () => {
     setSelectedRequest(null);
   };
 
-  const handleAcknowledgeClick = async ( selecteddonationid ) => {
-    try{
+  const handleAcknowledgeClick = async (selecteddonationid) => {
+    try {
       const response = await API.post(`/donation/acknowledge/${selecteddonationid}`);
-      if(response?.data?.success){
+      if (response?.data?.success) {
         alert(response.data.message);
         getBloodDonationRequests();
       }
       window.location.reload();
-    }catch (error){
+    } catch (error) {
       console.error(error);
     }
-  }
+  };
 
   return (
     <Layout>
@@ -200,7 +200,7 @@ const HomePage = () => {
                   <td>{donation.donor}</td>
                   <td>
                     <button
-                      onClick={() => handleAcknowledgeClick( donation._id )}
+                      onClick={() => handleAcknowledgeClick(donation._id)}
                       className="btn btn-success"
                     >
                       Acknowledge
@@ -234,6 +234,13 @@ const HomePage = () => {
           )}
 
           <Modal />
+          
+          <footer className="footer mt-5">
+            <p>
+              Any user who wants to get blood request notifications must verify their phone number in the <a href="https://www.twilio.com" target="_blank" rel="noopener noreferrer">Twilio</a> app.
+        
+            </p>
+          </footer>
         </div>
       )}
     </Layout>
